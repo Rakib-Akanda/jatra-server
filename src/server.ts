@@ -1,14 +1,20 @@
 /* eslint-disable no-console */
 import { Server } from "http";
 import app from "./app";
+import { envVars } from "./app/config/env";
+import mongoose from "mongoose";
 
 let server: Server;
 
 const bootStrap = async () => {
   try {
-    server = app.listen(5000, () => {
-      console.log(`✅ Server is running on port ${5000}`);
+    await mongoose.connect(envVars.DB_URL);
+    console.log("✅ Connected to DB");
+
+    server = app.listen(Number(envVars.PORT), () => {
+      console.log(`✅ Server is running on port ${Number(envVars.PORT)}`);
     });
+    
   } catch (error) {
     console.log(error);
   }
