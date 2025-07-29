@@ -65,7 +65,7 @@ const getSingleUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-export const UserController = {
+export const UserControllers = {
   createUser,
   updateUser,
   getAllUsers,
