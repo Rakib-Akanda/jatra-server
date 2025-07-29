@@ -1,5 +1,11 @@
 import { model, Schema } from "mongoose";
-import { IAuthProvider, IOnlineStatus, IUser, Role } from "./user.interface";
+import {
+  IAuthProvider,
+  IOnlineStatus,
+  IsActive,
+  IUser,
+  Role,
+} from "./user.interface";
 
 const authProviderSchema = new Schema<IAuthProvider>(
   {
@@ -23,9 +29,13 @@ const userSchema = new Schema<IUser>(
     image: { type: String },
     address: { type: String },
 
-    isDeleted: { type: Boolean },
-    isVerified: { type: Boolean },
-    isActive: { type: Boolean },
+    isDeleted: { type: Boolean, default: false },
+    isVerified: { type: Boolean, default: false },
+    isActive: {
+      type: Boolean,
+      enum: Object.values(IsActive),
+      default: IsActive.ACTIVE,
+    },
 
     onlineStatus: { type: String, enum: Object.values(IOnlineStatus) },
 

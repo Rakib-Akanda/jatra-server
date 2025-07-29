@@ -1,5 +1,5 @@
 import z from "zod";
-import { IsActive, Role } from "./user.interface";
+import { IGender, IsActive, Role } from "./user.interface";
 
 export const createUserZodSchema = z.object({
   name: z
@@ -32,12 +32,15 @@ export const createUserZodSchema = z.object({
     .regex(/^(?=.*\d)/, {
       message: "Password must contain at least 1 number",
     }),
-  gender: z.string().refine((val) => typeof val === "string", {
+  gender: z.enum(IGender).refine((val) => typeof val === "string", {
     message: "Gender must be a string",
   }),
-  dateOfBirth: z.string().refine((val) => typeof val === "string", {
-    message: "Date of Birth must be a string",
-  }),
+  dateOfBirth: z
+    .string()
+    .refine((val) => typeof val === "string", {
+      message: "Date of Birth must be a string",
+    })
+    .optional(),
   phone: z
     .string()
     .refine((val) => typeof val === "string", {
@@ -74,7 +77,7 @@ export const updateUserZodSchema = z.object({
     .max(50, { message: "Name too long" })
     .optional(),
   gender: z
-    .string()
+    .enum(IGender)
     .refine((val) => typeof val === "string", {
       message: "Gender must be a string",
     })

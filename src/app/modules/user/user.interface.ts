@@ -22,7 +22,11 @@ export enum IOnlineStatus {
   ONLINE = "ONLINE",
   OFFLINE = "OFFLINE",
 }
-
+export enum IGender {
+  MALE = "MALE",
+  FEMALE = "FEMALE",
+  OTHERS = "OTHERS",
+}
 export interface IUser {
   _id?: Types.ObjectId;
   name: string;
@@ -31,7 +35,7 @@ export interface IUser {
   auths: IAuthProvider[];
   password?: string;
 
-  gender: string;
+  gender: IGender;
   dateOfBirth?: Date;
   phone?: string;
   image?: string;
@@ -42,7 +46,7 @@ export interface IUser {
   isActive?: IsActive;
 
   onlineStatus?: IOnlineStatus;
-  
+
   rides?: Types.ObjectId[];
   createdAt?: Date;
 }
