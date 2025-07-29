@@ -23,7 +23,7 @@ const userSchema = new Schema<IUser>(
     auths: [authProviderSchema],
     password: { type: String },
 
-    gender: { type: String, required: true },
+    gender: { type: String },
     dateOfBirth: { type: Date },
     phone: { type: String },
     image: { type: String },

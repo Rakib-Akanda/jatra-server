@@ -22,6 +22,11 @@ interface EnvConfig {
     SMTP_PASS: string;
     SMTP_FROM: string;
   };
+  GOOGLE_OAUTH: {
+    GOOGLE_CLIENT_ID: string;
+    GOOGLE_CLIENT_SECRET: string;
+    GOOGLE_CALLBACK_URL: string;
+  };
 }
 
 const loadEnvVariables = (): EnvConfig => {
@@ -43,6 +48,9 @@ const loadEnvVariables = (): EnvConfig => {
     "SMTP_PASS",
     "SMTP_FROM",
     "FRONTEND_URL",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "GOOGLE_CALLBACK_URL",
   ];
 
   requiredEnvVariables.forEach((key) => {
@@ -69,6 +77,11 @@ const loadEnvVariables = (): EnvConfig => {
       SMTP_USER: process.env.SMTP_USER as string,
       SMTP_PASS: process.env.SMTP_PASS as string,
       SMTP_FROM: process.env.SMTP_FROM as string,
+    },
+    GOOGLE_OAUTH: {
+      GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID as string,
+      GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET as string,
+      GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL as string,
     },
   };
 };

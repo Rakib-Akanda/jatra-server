@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { router } from "./app/routes";
+import { envVars } from "./app/config/env";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import expressSession from "express-session";
 import "./app/config/passport.config";
-import { envVars } from "./app/config/env";
 import { notFound } from "./app/middlewares/notFound";
 import { globalErrorHandler } from "./app/middlewares/globalErrorHandler";
 const app = express();
@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.set("trust proxy", 1);
 app.use(
   cors({
-    origin: "http://localhost:5000",
+    origin: envVars.FRONTEND_URL,
     credentials: true,
   })
 );

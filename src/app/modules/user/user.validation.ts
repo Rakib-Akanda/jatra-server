@@ -32,9 +32,12 @@ export const createUserZodSchema = z.object({
     .regex(/^(?=.*\d)/, {
       message: "Password must contain at least 1 number",
     }),
-  gender: z.enum(IGender).refine((val) => typeof val === "string", {
-    message: "Gender must be a string",
-  }),
+  gender: z
+    .enum(IGender)
+    .refine((val) => typeof val === "string", {
+      message: "Gender must be a string",
+    })
+    .optional(),
   dateOfBirth: z
     .string()
     .refine((val) => typeof val === "string", {

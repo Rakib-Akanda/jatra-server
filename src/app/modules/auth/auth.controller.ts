@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
@@ -125,6 +126,22 @@ const resetPassword = catchAsync(async (req: Request, res: Response) => {
     data: null,
   });
 });
+const googleCallbackController = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    let redirectTo = req.query.state ? (req.query.state as string) : "";
+    if (redirectTo.startsWith("/")) {
+      redirectTo = redirectTo.slice(1);
+    }
+    const user = req.user;
+    if (!user) {
+      throw new AppError(StatusCodes.NOT_FOUND, "User not found");
+    }
+    const tokenInfo = createAccessToken(user);
+
+    setAuthCookie(res, tokenInfo);
+    res.redirect(`${envVars.FRONTEND_URL}/${redirectTo}`);
+  }
+);
 
 export const AuthControllers = {
   credentialsLogin,
@@ -134,4 +151,5 @@ export const AuthControllers = {
   setPassword,
   forgotPassword,
   resetPassword,
+  googleCallbackController,
 };
