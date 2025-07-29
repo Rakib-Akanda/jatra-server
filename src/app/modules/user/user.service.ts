@@ -81,8 +81,19 @@ const getAllUsers = async () => {
   const totalUsers = await User.countDocuments();
   return { data: users, meta: { total: totalUsers } };
 };
+const getMe = async (userId: string) => {
+  const users = await User.findById(userId).select("-password");
+  return { data: users };
+};
+const getSingleUser = async (userId: string) => {
+  const users = await User.findById(userId).select("-password");
+  return { data: users };
+};
+
 export const UserServices = {
   createUser,
   updateUser,
   getAllUsers,
+  getMe,
+  getSingleUser,
 };
