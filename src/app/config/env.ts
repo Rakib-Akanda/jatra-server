@@ -27,6 +27,12 @@ interface EnvConfig {
     GOOGLE_CLIENT_SECRET: string;
     GOOGLE_CALLBACK_URL: string;
   };
+  REDIS: {
+    REDIS_USERNAME: string;
+    REDIS_PASSWORD: string;
+    REDIS_HOST: string;
+    REDIS_PORT: string;
+  };
 }
 
 const loadEnvVariables = (): EnvConfig => {
@@ -51,6 +57,10 @@ const loadEnvVariables = (): EnvConfig => {
     "GOOGLE_CLIENT_ID",
     "GOOGLE_CLIENT_SECRET",
     "GOOGLE_CALLBACK_URL",
+    "REDIS_USERNAME",
+    "REDIS_PASSWORD",
+    "REDIS_HOST",
+    "REDIS_PORT",
   ];
 
   requiredEnvVariables.forEach((key) => {
@@ -82,6 +92,12 @@ const loadEnvVariables = (): EnvConfig => {
       GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID as string,
       GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET as string,
       GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL as string,
+    },
+    REDIS: {
+      REDIS_USERNAME: process.env.REDIS_USERNAME as string,
+      REDIS_PASSWORD: process.env.REDIS_PASSWORD as string,
+      REDIS_HOST: process.env.REDIS_HOST as string,
+      REDIS_PORT: process.env.REDIS_PORT as string,
     },
   };
 };
