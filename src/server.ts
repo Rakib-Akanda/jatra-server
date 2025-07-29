@@ -3,6 +3,7 @@ import { Server } from "http";
 import app from "./app";
 import { envVars } from "./app/config/env";
 import mongoose from "mongoose";
+import { seedSuperAdmin } from "./app/utils/seedSuperAdmin";
 
 let server: Server;
 
@@ -14,7 +15,6 @@ const bootStrap = async () => {
     server = app.listen(Number(envVars.PORT), () => {
       console.log(`✅ Server is running on port ${Number(envVars.PORT)}`);
     });
-    
   } catch (error) {
     console.log(error);
   }
@@ -23,6 +23,7 @@ const bootStrap = async () => {
 // IIFE
 (async () => {
   await bootStrap();
+  await seedSuperAdmin();
 })();
 
 process.on("unhandledRejection", (error) => {
