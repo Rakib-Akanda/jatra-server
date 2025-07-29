@@ -31,13 +31,15 @@ const updateUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 const getAllUsers = catchAsync(async (req: Request, res: Response) => {
-  const result = await UserServices.getAllUsers();
+  const query = req.query;
+  const result = await UserServices.getAllUsers(
+    query as Record<string, string>
+  );
   sendResponse(res, {
     success: true,
     statusCode: StatusCodes.OK,
     message: "All Users Retrieve Successfully",
     data: result,
-    meta: result.meta,
   });
 });
 const getMe = catchAsync(async (req: Request, res: Response) => {
