@@ -46,6 +46,9 @@ const getSingleDriver = async (id, decodedToken) => {
     if (!driver) {
         throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, "Driver not found.");
     }
+    if (driver.isDeleted) {
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, "Driver is deleted");
+    }
     if (decodedToken.role === user_interface_1.Role.DRIVER || decodedToken.role === user_interface_1.Role.RIDER) {
         if (decodedToken.userId !== driver.userId.toString()) {
             throw new AppError_1.default(http_status_codes_1.StatusCodes.FORBIDDEN, "You are not permitted.");
@@ -76,14 +79,16 @@ const approveDriver = async (id, payload) => {
         let deletedDriver;
         let user;
         if (payload.isDeleted) {
-            deletedDriver = await driver_model_1.Driver.findByIdAndDelete(id, { new: true });
+            deletedDriver = await driver_model_1.Driver.findByIdAndUpdate(id, {
+                isDeleted: payload.isDeleted,
+            }, { new: true, runValidators: true, session });
             user = await user_model_1.User.findByIdAndUpdate({ _id: driver.userId }, {
                 role: user_interface_1.Role.RIDER,
             }, {
                 new: true,
                 runValidators: true,
                 session,
-            }).select("_id, name email role");
+            }).select("_id name email role");
             await session.commitTransaction();
             session.endSession();
             return { deletedDriver, user };
@@ -100,7 +105,7 @@ const approveDriver = async (id, payload) => {
                 new: true,
                 runValidators: true,
                 session,
-            }).select("_id, name email role");
+            }).select("_id name email role");
         }
         await session.commitTransaction();
         session.endSession();

@@ -11,6 +11,7 @@ import { sendResponse } from "../../utils/sendResponse";
 import { AuthServices } from "./auth.service";
 import { envVars } from "../../config/env";
 import { JwtPayload } from "jsonwebtoken";
+import { Role } from "../user/user.interface";
 
 const credentialsLogin = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -25,6 +26,9 @@ const credentialsLogin = catchAsync(
             info.message || "Authentication Failed"
           )
         );
+      }
+      if (user.role === Role.DRIVER) {
+        await AuthServices.setCurrentLocationForDriver(req, user);
       }
       const userToken = await createAccessToken(user);
       setAuthCookie(res, userToken);

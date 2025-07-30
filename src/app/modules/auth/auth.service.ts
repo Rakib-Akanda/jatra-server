@@ -6,9 +6,12 @@ import { StatusCodes } from "http-status-codes";
 import { User } from "../user/user.model";
 import bcryptjs from "bcryptjs";
 import { envVars } from "../../config/env";
-import { IAuthProvider, IsActive } from "../user/user.interface";
+import { IAuthProvider, IsActive, IUser } from "../user/user.interface";
 import jwt from "jsonwebtoken";
 import { sendEmail } from "../../utils/sendEmail";
+import { Request } from "express";
+import { getCurrentLocationWithIP } from "../../utils/getCurrentLocation";
+import { Driver } from "../driver/driver.model";
 const getNewAccessToken = async (refreshToken: string) => {
   const newAccessToken =
     await createNewAccessTokenWithRefreshToken(refreshToken);
@@ -132,10 +135,27 @@ const resetPassword = async (
 
   await isUserExist.save();
 };
+const setCurrentLocationForDriver = async (
+  req: Request,
+  user: Partial<IUser>
+) => {
+  const currentLocation = await getCurrentLocationWithIP(req);
+  if (currentLocation.status) {
+    await Driver.findOneAndUpdate(
+      { userId: user._id },
+      {
+        currentLocation: currentLocation.currentLocation,
+      },
+      { runValidators: true }
+    );
+  }
+};
+
 export const AuthServices = {
   getNewAccessToken,
   changePassword,
   setPassword,
   forgotPassword,
   resetPassword,
+  setCurrentLocationForDriver,
 };

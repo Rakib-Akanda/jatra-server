@@ -74,7 +74,7 @@ exports.updateDriverZodValidation = zod_1.default.object({
     currentLocation: zod_1.default
         .object({
         lat: zod_1.default.number({ error: "Latitude must be a number" }),
-        lan: zod_1.default.number({ error: "Longitude must be a number" }),
+        lon: zod_1.default.number({ error: "Longitude must be a number" }),
     })
         .optional(),
 });
