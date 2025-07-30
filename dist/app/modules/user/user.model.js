@@ -13,7 +13,7 @@ const userSchema = new mongoose_1.Schema({
     role: { type: String, enum: Object.values(user_interface_1.Role), default: user_interface_1.Role.RIDER },
     auths: [authProviderSchema],
     password: { type: String },
-    gender: { type: String, required: true },
+    gender: { type: String },
     dateOfBirth: { type: Date },
     phone: { type: String },
     image: { type: String },

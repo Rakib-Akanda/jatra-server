@@ -10,6 +10,7 @@ const user_interface_1 = require("./user.interface");
 const user_model_1 = require("./user.model");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const env_1 = require("../../config/env");
+const QueryBuilder_1 = require("../../utils/QueryBuilder");
 const createUser = async (payload) => {
     const { email, password, ...rest } = payload;
     const isUserExist = await user_model_1.User.findOne({ email });
@@ -64,13 +65,27 @@ const updateUser = async (userId, payload, decodedToken) => {
     }).select("-password");
     return newUpdateUser;
 };
-const getAllUsers = async () => {
-    const users = await user_model_1.User.find().select("-password");
-    const totalUsers = await user_model_1.User.countDocuments();
-    return { data: users, meta: { total: totalUsers } };
+const getAllUsers = async (query) => {
+    const queryBuilder = new QueryBuilder_1.QueryBuilder(user_model_1.User.find(), query);
+    const users = await queryBuilder.filter().sort().fields().paginate();
+    const [data, meta] = await Promise.all([
+        users.build(),
+        queryBuilder.getMeta(),
+    ]);
+    return { meta: meta, data: data };
+};
+const getMe = async (userId) => {
+    const users = await user_model_1.User.findById(userId).select("-password");
+    return { data: users };
+};
+const getSingleUser = async (userId) => {
+    const users = await user_model_1.User.findById(userId).select("-password");
+    return { data: users };
 };
 exports.UserServices = {
     createUser,
     updateUser,
     getAllUsers,
+    getMe,
+    getSingleUser,
 };

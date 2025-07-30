@@ -4,6 +4,8 @@ exports.router = void 0;
 const express_1 = require("express");
 const user_route_1 = require("../modules/user/user.route");
 const auth_route_1 = require("../modules/auth/auth.route");
+const otp_route_1 = require("../modules/otp/otp.route");
+const driver_route_1 = require("../modules/driver/driver.route");
 exports.router = (0, express_1.Router)();
 const moduleRoutes = [
     {
@@ -13,6 +15,14 @@ const moduleRoutes = [
     {
         path: "/auth",
         route: auth_route_1.AuthRouts,
+    },
+    {
+        path: "/otp",
+        route: otp_route_1.OTPRoutes,
+    },
+    {
+        path: "/driver",
+        route: driver_route_1.DriverRoutes,
     },
 ];
 moduleRoutes.forEach((route) => {

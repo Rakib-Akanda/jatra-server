@@ -12,8 +12,9 @@ const handleValidationError_1 = require("../helpers/handleValidationError");
 const AppError_1 = __importDefault(require("../errorHelpers/AppError"));
 const globalErrorHandler = async (err, req, res, next) => {
     if (env_1.envVars.NODE_ENV === "development") {
-        // eslint-disable-next-line no-console
-        console.log(err);
+        console.log("🔴 Error name:", err.name);
+        console.log("🔴 Error message:", err.message);
+        console.log("🔴 Full error object:", err);
     }
     // if (req.file) {
     //   await deleteImageFromCloudinary(req.file.path);

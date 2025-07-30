@@ -7,6 +7,7 @@ const app_1 = __importDefault(require("./app"));
 const env_1 = require("./app/config/env");
 const mongoose_1 = __importDefault(require("mongoose"));
 const seedSuperAdmin_1 = require("./app/utils/seedSuperAdmin");
+const redis_config_1 = require("./app/config/redis.config");
 let server;
 const bootStrap = async () => {
     try {
@@ -22,6 +23,7 @@ const bootStrap = async () => {
 };
 // IIFE
 (async () => {
+    await (0, redis_config_1.connectRedis)();
     await bootStrap();
     await (0, seedSuperAdmin_1.seedSuperAdmin)();
 })();

@@ -27,6 +27,7 @@ export enum IGender {
   FEMALE = "FEMALE",
   OTHERS = "OTHERS",
 }
+
 export interface IUser {
   _id?: Types.ObjectId;
   name: string;
