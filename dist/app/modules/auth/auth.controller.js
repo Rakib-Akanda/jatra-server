@@ -13,6 +13,7 @@ const setCookie_1 = require("../../utils/setCookie");
 const sendResponse_1 = require("../../utils/sendResponse");
 const auth_service_1 = require("./auth.service");
 const env_1 = require("../../config/env");
+const user_interface_1 = require("../user/user.interface");
 const credentialsLogin = (0, catchAsync_1.catchAsync)(async (req, res, next) => {
     passport_1.default.authenticate("local", async (error, user, info) => {
         if (error) {
@@ -20,6 +21,9 @@ const credentialsLogin = (0, catchAsync_1.catchAsync)(async (req, res, next) => 
         }
         if (!user) {
             return next(new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, info.message || "Authentication Failed"));
+        }
+        if (user.role === user_interface_1.Role.DRIVER) {
+            await auth_service_1.AuthServices.setCurrentLocationForDriver(req, user);
         }
         const userToken = await (0, userToken_1.createAccessToken)(user);
         (0, setCookie_1.setAuthCookie)(res, userToken);

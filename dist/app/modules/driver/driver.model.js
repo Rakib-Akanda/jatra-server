@@ -41,7 +41,7 @@ const driverSchema = new mongoose_1.Schema({
     totalEarnings: { type: Number },
     currentLocation: {
         lat: { type: Number },
-        lng: { type: Number },
+        lon: { type: Number },
     },
 }, {
     versionKey: false,

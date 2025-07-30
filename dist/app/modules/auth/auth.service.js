@@ -13,6 +13,8 @@ const env_1 = require("../../config/env");
 const user_interface_1 = require("../user/user.interface");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const sendEmail_1 = require("../../utils/sendEmail");
+const getCurrentLocation_1 = require("../../utils/getCurrentLocation");
+const driver_model_1 = require("../driver/driver.model");
 const getNewAccessToken = async (refreshToken) => {
     const newAccessToken = await (0, userToken_1.createNewAccessTokenWithRefreshToken)(refreshToken);
     return { accessToken: newAccessToken };
@@ -97,10 +99,19 @@ const resetPassword = async (payload, decodedToken) => {
     isUserExist.password = hashedPassword;
     await isUserExist.save();
 };
+const setCurrentLocationForDriver = async (req, user) => {
+    const currentLocation = await (0, getCurrentLocation_1.getCurrentLocationWithIP)(req);
+    if (currentLocation.status) {
+        await driver_model_1.Driver.findOneAndUpdate({ userId: user._id }, {
+            currentLocation: currentLocation.currentLocation,
+        }, { runValidators: true });
+    }
+};
 exports.AuthServices = {
     getNewAccessToken,
     changePassword,
     setPassword,
     forgotPassword,
     resetPassword,
+    setCurrentLocationForDriver,
 };

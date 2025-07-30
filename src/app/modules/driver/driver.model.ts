@@ -52,7 +52,7 @@ const driverSchema = new Schema<IDriver>(
 
     currentLocation: {
       lat: { type: Number },
-      lng: { type: Number },
+      lon: { type: Number },
     },
   },
   {

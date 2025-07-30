@@ -39,6 +39,6 @@ export interface IDriver {
 
   currentLocation?: {
     lat: number;
-    lng: number;
+    lon: number;
   };
 }

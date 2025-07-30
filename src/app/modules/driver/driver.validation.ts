@@ -76,7 +76,7 @@ export const updateDriverZodValidation = z.object({
   currentLocation: z
     .object({
       lat: z.number({ error: "Latitude must be a number" }),
-      lan: z.number({ error: "Longitude must be a number" }),
+      lon: z.number({ error: "Longitude must be a number" }),
     })
     .optional(),
 });
