@@ -1,10 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IVehicleType = void 0;
-// export enum IDriverApproveStatus {
-//   APPROVE = "APPROVED",
-//   SUSPEND = "SUSPENDED",
-// }
+exports.IDriverStatus = exports.IVehicleType = void 0;
 var IVehicleType;
 (function (IVehicleType) {
     IVehicleType["BIKE"] = "BIKE";
@@ -12,3 +8,9 @@ var IVehicleType;
     IVehicleType["AUTO"] = "AUTO";
     IVehicleType["OTHERS"] = "OTHERS";
 })(IVehicleType || (exports.IVehicleType = IVehicleType = {}));
+var IDriverStatus;
+(function (IDriverStatus) {
+    IDriverStatus["APPROVED"] = "APPROVED";
+    IDriverStatus["SUSPENDED"] = "SUSPENDED";
+    IDriverStatus["PENDING"] = "PENDING";
+})(IDriverStatus || (exports.IDriverStatus = IDriverStatus = {}));

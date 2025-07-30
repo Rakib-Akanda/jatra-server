@@ -1,10 +1,5 @@
 import { Types } from "mongoose";
 
-// export enum IDriverApproveStatus {
-//   APPROVE = "APPROVED",
-//   SUSPEND = "SUSPENDED",
-// }
-
 export enum IVehicleType {
   BIKE = "BIKE",
   CAR = "CAR",
@@ -19,24 +14,31 @@ export interface IVehicleInfo {
   vehicleColor?: string;
   seats?: number;
 }
-
+export enum IDriverStatus {
+  APPROVED = "APPROVED",
+  SUSPENDED = "SUSPENDED",
+  PENDING = "PENDING",
+}
 export interface IDriver {
   _id?: Types.ObjectId;
   userId: Types.ObjectId;
+  name?: string;
+  email?: string;
 
-  nationalIdNumber: number;
+  NIDNumber: number;
   licenseNumber: number;
   vehicleInfo: IVehicleInfo;
-  isVerified: boolean; // After admin approval true
+
+  isAvailable?: boolean; // true if not in a ride
+  driverStatus?: IDriverStatus;
+  isDeleted?: boolean;
 
   rating?: number; // avg(4.7)
-  totalRides: number;
-  totalEarnings: number;
+  totalRides?: number;
+  totalEarnings?: number;
 
-  currentLocation: {
+  currentLocation?: {
     lat: number;
     lng: number;
   };
-  
-  isAvailable: boolean; // true if not in a ride
 }

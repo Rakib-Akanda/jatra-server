@@ -84,7 +84,7 @@ const getAllUsers = async (query: Record<string, string>) => {
     users.build(),
     queryBuilder.getMeta(),
   ]);
-  return { data: data, meta: meta };
+  return { meta: meta, data: data };
 };
 const getMe = async (userId: string) => {
   const users = await User.findById(userId).select("-password");
