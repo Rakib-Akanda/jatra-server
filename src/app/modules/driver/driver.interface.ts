@@ -3,8 +3,7 @@ import { Types } from "mongoose";
 export enum IVehicleType {
   BIKE = "BIKE",
   CAR = "CAR",
-  AUTO = "AUTO",
-  OTHERS = "OTHERS",
+  CNG = "CNG",
 }
 
 export interface IVehicleInfo {

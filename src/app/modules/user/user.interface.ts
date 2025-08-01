@@ -48,6 +48,5 @@ export interface IUser {
 
   onlineStatus?: IOnlineStatus;
 
-  rides?: Types.ObjectId[];
   createdAt?: Date;
 }

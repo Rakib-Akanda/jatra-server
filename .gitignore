@@ -1,4 +1,4 @@
 node_modules
 .env
-# src/app/modules/ride
-ride
+.vercel
+dev.env

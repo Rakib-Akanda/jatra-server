@@ -56,10 +56,34 @@ const getSingleUser = (0, catchAsync_1.catchAsync)(async (req, res) => {
         data: result,
     });
 });
+const blockUser = (0, catchAsync_1.catchAsync)(async (req, res) => {
+    const userId = req.params.id;
+    const decodedToken = req.user;
+    const result = await user_service_1.UserServices.blockUser(userId, decodedToken);
+    (0, sendResponse_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_codes_1.StatusCodes.OK,
+        message: "User Blocked Successfully",
+        data: result,
+    });
+});
+const unblockUser = (0, catchAsync_1.catchAsync)(async (req, res) => {
+    const userId = req.params.id;
+    const decodedToken = req.user;
+    const result = await user_service_1.UserServices.unblockUser(userId, decodedToken);
+    (0, sendResponse_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_codes_1.StatusCodes.OK,
+        message: "User Retrieve Successfully",
+        data: result,
+    });
+});
 exports.UserControllers = {
     createUser,
     updateUser,
     getAllUsers,
     getMe,
     getSingleUser,
+    blockUser,
+    unblockUser,
 };

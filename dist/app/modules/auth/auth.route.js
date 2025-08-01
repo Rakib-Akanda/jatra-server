@@ -13,7 +13,7 @@ const env_1 = require("../../config/env");
 const router = (0, express_1.Router)();
 router.post("/login", auth_controller_1.AuthControllers.credentialsLogin);
 router.post("/refresh-token", auth_controller_1.AuthControllers.getNewAccessToken);
-router.post("/logout", auth_controller_1.AuthControllers.logout);
+router.post("/logout", (0, checkAuth_1.checkAuth)(...Object.values(user_interface_1.Role)), auth_controller_1.AuthControllers.logout);
 router.post("/change-password", (0, checkAuth_1.checkAuth)(...Object.values(user_interface_1.Role)), auth_controller_1.AuthControllers.changePassword);
 router.post("/set-password", (0, checkAuth_1.checkAuth)(...Object.values(user_interface_1.Role)), auth_controller_1.AuthControllers.setPassword);
 router.post("/forgot-password", auth_controller_1.AuthControllers.forgotPassword);
