@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FareRuleRoutes = void 0;
+const express_1 = require("express");
+const fareRule_controller_1 = require("./fareRule.controller");
+const checkAuth_1 = require("../../middlewares/checkAuth");
+const user_interface_1 = require("../user/user.interface");
+const validRequest_1 = require("../../middlewares/validRequest");
+const fareRule_validation_1 = require("./fareRule.validation");
+const router = (0, express_1.Router)();
+router.post("/create", (0, checkAuth_1.checkAuth)(user_interface_1.Role.ADMIN, user_interface_1.Role.SUPER_ADMIN), (0, validRequest_1.validRequest)(fareRule_validation_1.createFareRuleZodSchema), fareRule_controller_1.FareRuleControllers.createFareRule);
+router.post("/update/:id", (0, checkAuth_1.checkAuth)(user_interface_1.Role.ADMIN, user_interface_1.Role.SUPER_ADMIN), (0, validRequest_1.validRequest)(fareRule_validation_1.updateFareRuleZodSchema), fareRule_controller_1.FareRuleControllers.updateFareRule);
+router.get("/:id", (0, checkAuth_1.checkAuth)(user_interface_1.Role.ADMIN, user_interface_1.Role.SUPER_ADMIN), fareRule_controller_1.FareRuleControllers.getSingleFareRule);
+router.get("/", (0, checkAuth_1.checkAuth)(user_interface_1.Role.ADMIN, user_interface_1.Role.SUPER_ADMIN), fareRule_controller_1.FareRuleControllers.getFareRule);
+exports.FareRuleRoutes = router;

@@ -60,7 +60,7 @@ passport_1.default.use(new passport_google_oauth20_1.Strategy({
         if (!email) {
             return done(null, false, { message: "No email found" });
         }
-        let isUserExist = await user_model_1.User.findOne({ email });
+        let isUserExist = await user_model_1.User.findOne({ email }).select("-password");
         if (isUserExist && !isUserExist.isVerified) {
             return done(null, false, { message: "User is not verified" });
         }

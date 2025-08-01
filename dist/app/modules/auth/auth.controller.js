@@ -14,6 +14,7 @@ const sendResponse_1 = require("../../utils/sendResponse");
 const auth_service_1 = require("./auth.service");
 const env_1 = require("../../config/env");
 const user_interface_1 = require("../user/user.interface");
+const user_model_1 = require("../user/user.model");
 const credentialsLogin = (0, catchAsync_1.catchAsync)(async (req, res, next) => {
     passport_1.default.authenticate("local", async (error, user, info) => {
         if (error) {
@@ -26,6 +27,9 @@ const credentialsLogin = (0, catchAsync_1.catchAsync)(async (req, res, next) => 
             await auth_service_1.AuthServices.setCurrentLocationForDriver(req, user);
         }
         const userToken = await (0, userToken_1.createAccessToken)(user);
+        await user_model_1.User.findByIdAndUpdate(user._id, {
+            onlineStatus: user_interface_1.IOnlineStatus.ONLINE,
+        });
         (0, setCookie_1.setAuthCookie)(res, userToken);
         (0, sendResponse_1.sendResponse)(res, {
             success: true,
@@ -63,6 +67,10 @@ const logout = (0, catchAsync_1.catchAsync)(async (req, res) => {
         httpOnly: true,
         secure: env_1.envVars.NODE_ENV === "production",
         sameSite: "lax",
+    });
+    const decodedToken = req.user;
+    await user_model_1.User.findByIdAndUpdate(decodedToken.userId, {
+        onlineStatus: user_interface_1.IOnlineStatus.OFFLINE,
     });
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
@@ -124,6 +132,9 @@ const googleCallbackController = (0, catchAsync_1.catchAsync)(async (req, res, n
         throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, "User not found");
     }
     const tokenInfo = (0, userToken_1.createAccessToken)(user);
+    await user_model_1.User.findByIdAndUpdate(user._id, {
+        onlineStatus: user_interface_1.IOnlineStatus.ONLINE,
+    });
     (0, setCookie_1.setAuthCookie)(res, tokenInfo);
     res.redirect(`${env_1.envVars.FRONTEND_URL}/${redirectTo}`);
 });

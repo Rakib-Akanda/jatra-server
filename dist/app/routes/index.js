@@ -7,6 +7,7 @@ const auth_route_1 = require("../modules/auth/auth.route");
 const otp_route_1 = require("../modules/otp/otp.route");
 const driver_route_1 = require("../modules/driver/driver.route");
 const ride_route_1 = require("../modules/ride/ride.route");
+const fareRule_route_1 = require("../modules/fareRule/fareRule.route");
 exports.router = (0, express_1.Router)();
 const moduleRoutes = [
     {
@@ -22,12 +23,16 @@ const moduleRoutes = [
         route: otp_route_1.OTPRoutes,
     },
     {
-        path: "/driver",
+        path: "/drivers",
         route: driver_route_1.DriverRoutes,
     },
     {
         path: "/rides",
         route: ride_route_1.RideRoutes,
+    },
+    {
+        path: "/fare-rule",
+        route: fareRule_route_1.FareRuleRoutes,
     },
 ];
 moduleRoutes.forEach((route) => {

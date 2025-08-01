@@ -26,7 +26,6 @@ const userSchema = new mongoose_1.Schema({
         default: user_interface_1.IsActive.ACTIVE,
     },
     onlineStatus: { type: String, enum: Object.values(user_interface_1.IOnlineStatus) },
-    rides: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "Ride" }],
 }, {
     versionKey: false,
     timestamps: true,

@@ -5,8 +5,7 @@ var IVehicleType;
 (function (IVehicleType) {
     IVehicleType["BIKE"] = "BIKE";
     IVehicleType["CAR"] = "CAR";
-    IVehicleType["AUTO"] = "AUTO";
-    IVehicleType["OTHERS"] = "OTHERS";
+    IVehicleType["CNG"] = "CNG";
 })(IVehicleType || (exports.IVehicleType = IVehicleType = {}));
 var IDriverStatus;
 (function (IDriverStatus) {

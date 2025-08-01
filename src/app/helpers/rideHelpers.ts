@@ -87,12 +87,7 @@ export const handleDriverRideStatus = async (
       "You are not able to update this ride."
     );
   }
-  if (!driver.isAvailable) {
-    throw new AppError(
-      StatusCodes.FORBIDDEN,
-      "You are currently in another ride and not available."
-    );
-  }
+
   switch (payload.status) {
     case RIDE_STATUS.CANCELLED:
       if (
