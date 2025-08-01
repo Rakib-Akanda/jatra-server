@@ -4,6 +4,7 @@ import { AuthRouts } from "../modules/auth/auth.route";
 import { OTPRoutes } from "../modules/otp/otp.route";
 import { DriverRoutes } from "../modules/driver/driver.route";
 import { RideRoutes } from "../modules/ride/ride.route";
+import { FareRuleRoutes } from "../modules/fareRule/fareRule.route";
 
 export const router = Router();
 
@@ -21,12 +22,16 @@ const moduleRoutes = [
     route: OTPRoutes,
   },
   {
-    path: "/driver",
+    path: "/drivers",
     route: DriverRoutes,
   },
   {
     path: "/rides",
     route: RideRoutes,
+  },
+  {
+    path: "/fare-rule",
+    route: FareRuleRoutes,
   },
 ];
 

@@ -85,7 +85,7 @@ passport.use(
         if (!email) {
           return done(null, false, { message: "No email found" });
         }
-        let isUserExist = await User.findOne({ email });
+        let isUserExist = await User.findOne({ email }).select("-password");
         if (isUserExist && !isUserExist.isVerified) {
           return done(null, false, { message: "User is not verified" });
         }

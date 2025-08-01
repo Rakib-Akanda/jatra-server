@@ -12,6 +12,17 @@ router.post(
   validRequest(createUserZodSchema),
   UserControllers.createUser
 );
+router.post(
+  "/block/:id",
+  checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
+  UserControllers.blockUser
+);
+router.post(
+  "/unblock/:id",
+  checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
+  UserControllers.unblockUser
+);
+
 router.get(
   "/all-users",
   checkAuth(Role.ADMIN, Role.SUPER_ADMIN),

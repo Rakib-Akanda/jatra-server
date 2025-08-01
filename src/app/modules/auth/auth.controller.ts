@@ -11,7 +11,8 @@ import { sendResponse } from "../../utils/sendResponse";
 import { AuthServices } from "./auth.service";
 import { envVars } from "../../config/env";
 import { JwtPayload } from "jsonwebtoken";
-import { Role } from "../user/user.interface";
+import { IOnlineStatus, IUser, Role } from "../user/user.interface";
+import { User } from "../user/user.model";
 
 const credentialsLogin = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -31,6 +32,9 @@ const credentialsLogin = catchAsync(
         await AuthServices.setCurrentLocationForDriver(req, user);
       }
       const userToken = await createAccessToken(user);
+      await User.findByIdAndUpdate(user._id, {
+        onlineStatus: IOnlineStatus.ONLINE,
+      });
       setAuthCookie(res, userToken);
       sendResponse(res, {
         success: true,
@@ -75,7 +79,10 @@ const logout = catchAsync(async (req: Request, res: Response) => {
     secure: envVars.NODE_ENV === "production",
     sameSite: "lax",
   });
-
+  const decodedToken = req.user as JwtPayload;
+  await User.findByIdAndUpdate(decodedToken.userId, {
+    onlineStatus: IOnlineStatus.OFFLINE,
+  });
   sendResponse(res, {
     success: true,
     statusCode: StatusCodes.OK,
@@ -136,12 +143,14 @@ const googleCallbackController = catchAsync(
     if (redirectTo.startsWith("/")) {
       redirectTo = redirectTo.slice(1);
     }
-    const user = req.user;
+    const user = req.user as IUser;
     if (!user) {
       throw new AppError(StatusCodes.NOT_FOUND, "User not found");
     }
     const tokenInfo = createAccessToken(user);
-
+    await User.findByIdAndUpdate(user._id, {
+      onlineStatus: IOnlineStatus.ONLINE,
+    });
     setAuthCookie(res, tokenInfo);
     res.redirect(`${envVars.FRONTEND_URL}/${redirectTo}`);
   }

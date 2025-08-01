@@ -38,8 +38,6 @@ const userSchema = new Schema<IUser>(
     },
 
     onlineStatus: { type: String, enum: Object.values(IOnlineStatus) },
-
-    rides: [{ type: Schema.Types.ObjectId, ref: "Ride" }],
   },
   {
     versionKey: false,

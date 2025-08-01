@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import AppError from "../../errorHelpers/AppError";
-import { IAuthProvider, IUser, Role } from "./user.interface";
+import { IAuthProvider, IsActive, IUser, Role } from "./user.interface";
 import { User } from "./user.model";
 import bcryptjs from "bcryptjs";
 import { envVars } from "../../config/env";
@@ -94,11 +94,86 @@ const getSingleUser = async (userId: string) => {
   const users = await User.findById(userId).select("-password");
   return { data: users };
 };
+const blockUser = async (userId: string, decodedToken: JwtPayload) => {
+  if (!userId) {
+    throw new AppError(StatusCodes.BAD_REQUEST, "User id not found");
+  }
+  if (![Role.ADMIN, Role.SUPER_ADMIN].includes(decodedToken.role)) {
+    throw new AppError(
+      StatusCodes.FORBIDDEN,
+      "You are not authorized to access this resource"
+    );
+  }
+  const user = await User.findById(userId).select("-password");
+  if (!user) {
+    throw new AppError(StatusCodes.NOT_FOUND, "User not found");
+  }
+  if (user.isActive === IsActive.BLOCKED) {
+    throw new AppError(StatusCodes.BAD_REQUEST, "User already blocked");
+  }
+  if (
+    decodedToken.role === Role.ADMIN &&
+    (user.role === Role.ADMIN || user.role === Role.SUPER_ADMIN)
+  ) {
+    throw new AppError(
+      StatusCodes.FORBIDDEN,
+      "You are not permitted to block this user"
+    );
+  }
+  const blockedUser = await User.findByIdAndUpdate(
+    userId,
+    {
+      isActive: IsActive.BLOCKED,
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  ).select("-password");
+  return blockedUser;
+};
+const unblockUser = async (userId: string, decodedToken: JwtPayload) => {
+  if (!userId) {
+    throw new AppError(StatusCodes.BAD_REQUEST, "User id is required");
+  }
 
+  if (![Role.ADMIN, Role.SUPER_ADMIN].includes(decodedToken.role)) {
+    throw new AppError(
+      StatusCodes.FORBIDDEN,
+      "You are not authorized to access this resource"
+    );
+  }
+
+  const user = await User.findById(userId).select("-password");
+  if (!user) {
+    throw new AppError(StatusCodes.NOT_FOUND, "User not found");
+  }
+  if (user.isActive !== IsActive.BLOCKED) {
+    throw new AppError(StatusCodes.BAD_REQUEST, "User already unblocked");
+  }
+  if (
+    decodedToken.role === Role.ADMIN &&
+    (user.role === Role.ADMIN || user.role === Role.SUPER_ADMIN)
+  ) {
+    throw new AppError(
+      StatusCodes.FORBIDDEN,
+      "You are not permitted to unblock this user"
+    );
+  }
+  const unblockedUser = await User.findByIdAndUpdate(
+    userId,
+    { isActive: IsActive.ACTIVE },
+    { new: true, runValidators: true }
+  ).select("-password");
+
+  return unblockedUser;
+};
 export const UserServices = {
   createUser,
   updateUser,
   getAllUsers,
   getMe,
   getSingleUser,
+  blockUser,
+  unblockUser,
 };
