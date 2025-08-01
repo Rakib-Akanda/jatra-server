@@ -5,7 +5,7 @@ import { IVehicleType } from "../driver/driver.interface";
 const rideSchema = new Schema<IRide>(
   {
     riderId: { type: Schema.Types.ObjectId, required: true },
-    driverId: { type: Schema.Types.ObjectId },
+    driverId: { type: Schema.Types.ObjectId, ref: "User" },
 
     vehicleType: {
       type: String,
@@ -33,13 +33,12 @@ const rideSchema = new Schema<IRide>(
       default: RIDE_STATUS.REQUESTED,
     },
     adminAction: {
-      by: { type: Schema.Types.ObjectId, required: true },
+      by: { type: Schema.Types.ObjectId },
       action: {
         type: String,
         enum: { ...Object.values(RIDE_STATUS) },
-        required: true,
       },
-      at: { type: Date, required: true },
+      at: { type: Date },
     },
 
     cancelledBy: { type: Schema.Types.ObjectId },

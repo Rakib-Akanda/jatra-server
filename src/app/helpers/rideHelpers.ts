@@ -87,7 +87,6 @@ export const handleDriverRideStatus = async (
       "You are not able to update this ride."
     );
   }
-
   switch (payload.status) {
     case RIDE_STATUS.CANCELLED:
       if (
@@ -104,7 +103,7 @@ export const handleDriverRideStatus = async (
       ride.cancelledBy = decodedToken.userId;
       ride.cancellationReason =
         payload.cancellationReason ?? "No reason provided";
-      await updateDriverAvailability(decodedToken.userId, true);
+      await updateDriverAvailability(decodedToken, true);
       break;
     case RIDE_STATUS.ACCEPTED:
       if (ride.status !== RIDE_STATUS.REQUESTED) {
@@ -119,7 +118,7 @@ export const handleDriverRideStatus = async (
           "You are currently in another ride and not available."
         );
       }
-      await updateDriverAvailability(decodedToken.userId, false);
+      await updateDriverAvailability(decodedToken, false);
       ride.status = RIDE_STATUS.ACCEPTED;
       ride.driverId = decodedToken.userId;
       break;
@@ -162,7 +161,7 @@ export const handleDriverRideStatus = async (
       }
 
       ride.fare = await calculateFare(ride);
-      await updateDriverAvailability(decodedToken.userId, true);
+      await updateDriverAvailability(decodedToken, true);
       await Driver.findByIdAndUpdate(
         { _id: driver._id },
         {

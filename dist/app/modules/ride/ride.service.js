@@ -74,8 +74,7 @@ const updateRideStatus = async (id, payload, decodedToken) => {
     if (!ride) {
         throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, "Ride not found");
     }
-    if (ride.status === payload.status ||
-        ride.cancellationReason === payload.cancellationReason) {
+    if (ride.status === payload.status) {
         throw new AppError_1.default(http_status_codes_1.StatusCodes.CONFLICT, "Please provide different status");
     }
     // Rider Section
@@ -84,20 +83,28 @@ const updateRideStatus = async (id, payload, decodedToken) => {
         const updatedRide = await ride.save();
         return updatedRide;
     }
-    // driver section
+    // Driver Section
     if (decodedToken.role === user_interface_1.Role.DRIVER) {
+        if (ride.status === ride_interface_1.RIDE_STATUS.COMPLETED) {
+            throw new AppError_1.default(http_status_codes_1.StatusCodes.BAD_REQUEST, "This ride has been completed.");
+        }
+        let driver = null;
         if (!ride.driverId) {
             if (payload.status !== ride_interface_1.RIDE_STATUS.ACCEPTED) {
-                throw new AppError_1.default(http_status_codes_1.StatusCodes.BAD_REQUEST, "No driver assigned to this ride yet.");
+                throw new AppError_1.default(http_status_codes_1.StatusCodes.BAD_REQUEST, "No driver assigned to this ride yet. Please provide first status as accepted.");
             }
-        }
-        else {
-            const driver = await driver_model_1.Driver.findOne({ _id: ride.driverId });
+            driver = await driver_model_1.Driver.findOne({ userId: decodedToken.userId });
             if (!driver) {
                 throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, "Driver not found");
             }
-            await (0, rideHelpers_1.handleDriverRideStatus)(driver, ride, payload, decodedToken);
         }
+        else {
+            driver = await driver_model_1.Driver.findOne({ userId: ride.driverId });
+            if (!driver) {
+                throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, "Driver not found");
+            }
+        }
+        await (0, rideHelpers_1.handleDriverRideStatus)(driver, ride, payload, decodedToken);
         const updatedRide = await ride.save();
         return updatedRide;
     }

@@ -6,7 +6,7 @@ const ride_interface_1 = require("./ride.interface");
 const driver_interface_1 = require("../driver/driver.interface");
 const rideSchema = new mongoose_1.Schema({
     riderId: { type: mongoose_1.Schema.Types.ObjectId, required: true },
-    driverId: { type: mongoose_1.Schema.Types.ObjectId },
+    driverId: { type: mongoose_1.Schema.Types.ObjectId, ref: "User" },
     vehicleType: {
         type: String,
         enum: { ...Object.values(driver_interface_1.IVehicleType) },
@@ -30,13 +30,12 @@ const rideSchema = new mongoose_1.Schema({
         default: ride_interface_1.RIDE_STATUS.REQUESTED,
     },
     adminAction: {
-        by: { type: mongoose_1.Schema.Types.ObjectId, required: true },
+        by: { type: mongoose_1.Schema.Types.ObjectId },
         action: {
             type: String,
             enum: { ...Object.values(ride_interface_1.RIDE_STATUS) },
-            required: true,
         },
-        at: { type: Date, required: true },
+        at: { type: Date },
     },
     cancelledBy: { type: mongoose_1.Schema.Types.ObjectId },
     cancellationReason: { type: String },

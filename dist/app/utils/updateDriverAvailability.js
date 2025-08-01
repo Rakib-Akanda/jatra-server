@@ -7,10 +7,10 @@ exports.updateDriverAvailability = void 0;
 const AppError_1 = __importDefault(require("../errorHelpers/AppError"));
 const http_status_codes_1 = require("http-status-codes");
 const driver_model_1 = require("../modules/driver/driver.model");
-const updateDriverAvailability = async (driverId, isAvailable) => {
-    if (!driverId)
+const updateDriverAvailability = async (decodedToken, isAvailable) => {
+    if (!decodedToken.userId)
         return;
-    const driver = await driver_model_1.Driver.findById(driverId);
+    const driver = await driver_model_1.Driver.findOne({ userId: decodedToken.userId });
     if (!driver) {
         throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, "Driver not found for update available");
     }

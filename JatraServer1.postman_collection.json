@@ -1,0 +1,1111 @@
+{
+	"info": {
+		"_postman_id": "5479eeed-4b85-4823-9c5f-cd8418699d62",
+		"name": "Jatra Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43102683",
+		"_collection_link": "https://galactic-equinox-290575.postman.co/workspace/Team-Workspace~ba1cc21a-75e5-4b12-8673-479a627a57be/collection/43102683-5479eeed-4b85-4823-9c5f-cd8418699d62?action=share&source=collection_link&creator=43102683"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     \"name\": \"Rakib Akanda\",\r\n//     \"email\": \"rmd04037@gmail.com\",\r\n//     \"password\": \"Rakib@11\",\r\n//     \"gender\": \"MALE\"\r\n// }\r\n// {\r\n//     \"name\": \"Alor Galpa\",\r\n//     \"email\": \"alorgalpa@gmail.com\",\r\n//     \"password\": \"Rakib@11\",\r\n//     \"gender\": \"MALE\"\r\n// }\r\n// {\r\n//     \"name\": \"Alex Ro\",\r\n//     \"email\": \"xfor496@gmail.com\",\r\n//     \"password\": \"Rakib@11\",\r\n//     \"gender\": \"MALE\"\r\n// }\r\n// {\r\n//     \"name\": \"Tamim Mia\",\r\n//     \"email\": \"mdmotaharali226@gmail.com\",\r\n//     \"password\": \"Rakib@11\",\r\n//     \"gender\": \"MALE\"\r\n// }\r\n// {\r\n//     \"name\": \"Dark Rakib\",\r\n//     \"email\": \"lovefrom574@gmail.com\",\r\n//     \"password\": \"Rakib@11\",\r\n//     \"gender\": \"MALE\"\r\n// }\r\n{\r\n    \"name\": \"Rakib IN\",\r\n    \"email\": \"rakibakandaindia@gmail.com\",\r\n    \"password\": \"Rakib@11\",\r\n    \"gender\": \"MALE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/user/register",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjN2ZkODVhZTM4ZjI3OWVmZDlkY2IiLCJlbWFpbCI6InJha2liYWthbmRhaW5kaWFAZ21haWwuY29tIiwicm9sZSI6IlJJREVSIiwiaWF0IjoxNzU0MDM4NTg0LCJleHAiOjE3NTQxMjQ5ODR9.eg9ZFcI0wMBvRW1y_Q72fXVKrfYwIkeU-s4rUnA2lY8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     \"phone\": \"01304162499\"\r\n//     // \"role\": \"DRIVER\" // only admin\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/user/688c7fd85ae38f279efd9dcb",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"688c7fd85ae38f279efd9dcb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3ZmI4YjFlZTdkZWYzYTFhOTRlOTYiLCJlbWFpbCI6InJtZDA0MDM3QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1Mzk5NDEzMywiZXhwIjoxNzU0MDgwNTMzfQ.MRQvhC3J_iYZYwMsvtZx5BirXlUf9Z50Dp-_8ra-o_c",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/user/all-users?sort=name&page=1&role=RIDER",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"all-users"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "fields",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "role",
+									"value": "RIDER"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjN2ZkODVhZTM4ZjI3OWVmZDlkY2IiLCJlbWFpbCI6InJha2liYWthbmRhaW5kaWFAZ21haWwuY29tIiwicm9sZSI6IlJJREVSIiwiaWF0IjoxNzU0MDM4NTg0LCJleHAiOjE3NTQxMjQ5ODR9.eg9ZFcI0wMBvRW1y_Q72fXVKrfYwIkeU-s4rUnA2lY8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/user/me",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjN2ZkODVhZTM4ZjI3OWVmZDlkY2IiLCJlbWFpbCI6InJha2liYWthbmRhaW5kaWFAZ21haWwuY29tIiwicm9sZSI6IlJJREVSIiwiaWF0IjoxNzU0MDM4NTg0LCJleHAiOjE3NTQxMjQ5ODR9.eg9ZFcI0wMBvRW1y_Q72fXVKrfYwIkeU-s4rUnA2lY8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     \"name\": \"Rakib Akanda\",\r\n//     \"email\": \"rmd04037@gmail.com\",\r\n//     \"password\": \"Rakib@11\",\r\n//     \"gender\": \"MALE\"\r\n// }\r\n{\r\n    \"name\": \"Alor Galpa\",\r\n    \"email\": \"alorgalpa@gmail.com\",\r\n    \"password\": \"Rakib@11\",\r\n    \"gender\": \"MALE\",\r\n}"
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/user/688c7fd85ae38f279efd9dcb",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"688c7fd85ae38f279efd9dcb"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Block User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3ZmI4YjFlZTdkZWYzYTFhOTRlOTYiLCJlbWFpbCI6InJtZDA0MDM3QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1Mzk1NjQ5NiwiZXhwIjoxNzU0MDQyODk2fQ.ep52r_6I8E7lHdzPTHDQAsqIusjhUxEij2NQlXbs9fU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/user/block/6888a4dbf8054ec8e71fd794",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"block",
+								"6888a4dbf8054ec8e71fd794"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unblock User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3ZmI4YjFlZTdkZWYzYTFhOTRlOTYiLCJlbWFpbCI6InJtZDA0MDM3QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1Mzk1NjQ5NiwiZXhwIjoxNzU0MDQyODk2fQ.ep52r_6I8E7lHdzPTHDQAsqIusjhUxEij2NQlXbs9fU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/user/unblock/6888a4dbf8054ec8e71fd794",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"unblock",
+								"6888a4dbf8054ec8e71fd794"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg4YTRkYmY4MDU0ZWM4ZTcxZmQ3OTQiLCJlbWFpbCI6ImFsb3JnYWxwYUBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTM3ODU3MTgsImV4cCI6MTc1Mzg3MjExOH0.A5da-ax7hgrEC4tzAkX4AiOkpZbzXBpN1R0lYU__Hbc",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// SUPER ADMIN\r\n// {\r\n//     \"email\": \"super@gmail.com\",\r\n//     \"password\": \"SuperAdmin@11\"\r\n// }\r\n// ADMIN\r\n// {\r\n//     \"email\": \"rmd04037@gmail.com\",\r\n//     \"password\": \"Rakib@11\"\r\n//     // \"password\": \"Rakib@22\"\r\n// }\r\n// DRIVER\r\n// {\r\n//     \"email\": \"alorgalpa@gmail.com\",\r\n//     \"password\": \"RAKIB@22\"\r\n// }\r\n{\r\n    \"email\": \"xfor496@gmail.com\",\r\n    \"password\": \"Rakib@11\"\r\n} \r\n// {\r\n//     \"email\": \"lovefrom574@gmail.com\",\r\n//     \"password\": \"Rakib@11\"\r\n// }\r\n// RIDER\r\n// {\r\n//     \"email\": \"mdmotaharali226@gmail.com\",\r\n//     \"password\": \"Rakib@11\"\r\n// }\r\n// {\r\n//     \"email\": \"rakibakandaindia@gmail.com\",\r\n//     \"password\": \"Rakib@11\"\r\n// }\r\n// {\r\n//     \"email\": \"darkrakib925@gmail.com\",\r\n//     \"password\": \"RAKIB@22\"\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/auth/login",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get New Access Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/auth/refresh-token",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3ZmI4YjFlZTdkZWYzYTFhOTRlOTYiLCJlbWFpbCI6InJtZDA0MDM3QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NDAxMzA4MSwiZXhwIjoxNzU0MDk5NDgxfQ.gBUlSUiuk0_gsEp_l5X_8UfkkcCNSP_UEhw2yj7j3Qc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/auth/logout",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjN2ZkODVhZTM4ZjI3OWVmZDlkY2IiLCJlbWFpbCI6InJha2liYWthbmRhaW5kaWFAZ21haWwuY29tIiwicm9sZSI6IlJJREVSIiwiaWF0IjoxNzU0MDM4NTg0LCJleHAiOjE3NTQxMjQ5ODR9.eg9ZFcI0wMBvRW1y_Q72fXVKrfYwIkeU-s4rUnA2lY8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\": \"Rakib@11\",\r\n    \"newPassword\": \"Rakib@22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/auth/change-password",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg5MTRmZWMyNzRlMTk3ZDIxNGVmYjciLCJlbWFpbCI6ImRhcmtyYWtpYjkyNUBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTM5ODgwMTUsImV4cCI6MTc1NDA3NDQxNX0.lDumNsFP7G7rHyHWZkOTgvTzDtLbuRngWe72wQqUtUk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     \"id\": \"6888a4dbf8054ec8e71fd794\",\r\n//     \"newPassword\": \"RAKIB@22\"\r\n\r\n// }\r\n{\r\n    \"id\": \"688914fec274e197d214efb7\",\r\n    \"newPassword\": \"RAKIB@22\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/auth/reset-password",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg4YTRkYmY4MDU0ZWM4ZTcxZmQ3OTQiLCJlbWFpbCI6ImFsb3JnYWxwYUBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTM3ODU3MTgsImV4cCI6MTc1Mzg3MjExOH0.A5da-ax7hgrEC4tzAkX4AiOkpZbzXBpN1R0lYU__Hbc",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// SUPER ADMIN\r\n// {\r\n//     \"email\": \"super@gmail.com\",\r\n//     \"password\": \"SuperAdmin@11\"\r\n// }\r\n\r\n// ADMIN\r\n{\r\n    \"email\": \"rmd04037@gmail.com\",\r\n    \"password\": \"Rakib@11\"\r\n    // \"password\": \"Rakib@22\"\r\n}\r\n\r\n// DRIVER\r\n// {\r\n//     \"email\": \"alorgalpa@gmail.com\",\r\n//     \"password\": \"Rakib@11\"\r\n// }\r\n\r\n// RIDER\r\n// {\r\n//     \"email\": \"xfor496@gmail.com\",\r\n//     \"password\": \"Rakib@11\"\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/auth/set-passwrod",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"set-passwrod"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forget Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"rakibakandaindia@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/auth/forgot-password",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OTP",
+			"item": [
+				{
+					"name": "Send OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     \"email\": \"lovefrom574@gmail.com\"\r\n// }\r\n{\r\n    \"email\": \"rakibakandaindia@gmail.com\"\r\n}\r\n// {\r\n//     \"email\": \"mdmotaharali226@gmail.com\"\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/otp/send",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"otp",
+								"send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     \"email\": \"lovefrom574@gmail.com\",\r\n//     \"otp\": \"436919\"\r\n// }\r\n{\r\n    \"email\": \"rakibakandaindia@gmail.com\",\r\n    \"otp\": \"550893\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/otp/verify",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"otp",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "Apply Driver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjN2ZkODVhZTM4ZjI3OWVmZDlkY2IiLCJlbWFpbCI6InJha2liYWthbmRhaW5kaWFAZ21haWwuY29tIiwicm9sZSI6IlJJREVSIiwiaWF0IjoxNzU0MDM4NTg0LCJleHAiOjE3NTQxMjQ5ODR9.eg9ZFcI0wMBvRW1y_Q72fXVKrfYwIkeU-s4rUnA2lY8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     \"userId\": \"68891583c274e197d214efba\",\r\n//     \"NIDNumber\": 1219839292328,\r\n//     \"licenseNumber\": 32949393493,\r\n//     \"vehicleInfo\": {\r\n//         \"vehicleType\": \"CAR\",\r\n//         \"vehicleModel\": \"BMWW\",\r\n//         \"vehicleNumberPlate\": \"LA2989\"\r\n//     }\r\n// }\r\n// {\r\n//     \"userId\": \"6888ca6bf421b130991149ba\",\r\n//     \"NIDNumber\": 12198392292328,\r\n//     \"licenseNumber\": 329493293493,\r\n//     \"vehicleInfo\": {\r\n//         \"vehicleType\": \"BIKE\",\r\n//         \"vehicleModel\": \"R15\",\r\n//         \"vehicleNumberPlate\": \"LA29822\"\r\n//     }\r\n// }\r\n{\r\n    \"userId\": \"688c7fd85ae38f279efd9dcb\",\r\n    \"NIDNumber\": 121983922392318,\r\n    \"licenseNumber\": 3294392293493,\r\n    \"vehicleInfo\": {\r\n        \"vehicleType\": \"BIKE\",\r\n        \"vehicleModel\": \"R15\",\r\n        \"vehicleNumberPlate\": \"LA29822\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/drivers/apply",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Drivers only admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3ZmI4YjFlZTdkZWYzYTFhOTRlOTYiLCJlbWFpbCI6InJtZDA0MDM3QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NDAzOTgzOSwiZXhwIjoxNzU0MTI2MjM5fQ.bH0FGMg28OqsEbPRfFWOGSUFVQn_UQxVHxHifWlP46g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/drivers/?sort=name&page=1&driverStatus=PENDING",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								""
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "fields",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "driverStatus",
+									"value": "APPROVED",
+									"disabled": true
+								},
+								{
+									"key": "driverStatus",
+									"value": "PENDING"
+								},
+								{
+									"key": "driverStatus",
+									"value": "SUSPENDED",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single Driver Admin all or Driver me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg4Y2E2YmY0MjFiMTMwOTkxMTQ5YmEiLCJlbWFpbCI6Inhmb3I0OTZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NDA0MDA4OCwiZXhwIjoxNzU0MTI2NDg4fQ.LyVI0gfQTafmw_uPy70pIn1LbpcQcpohPInruasfGiY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/drivers/688c85d12cb400c40b8e1975",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"688c85d12cb400c40b8e1975"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve Driver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3ZmI4YjFlZTdkZWYzYTFhOTRlOTYiLCJlbWFpbCI6InJtZDA0MDM3QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NDAzOTgzOSwiZXhwIjoxNzU0MTI2MjM5fQ.bH0FGMg28OqsEbPRfFWOGSUFVQn_UQxVHxHifWlP46g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"driverStatus\": \"APPROVED\",\r\n    \"isAvailable\": true\r\n}\r\n// {\r\n//     \"driverStatus\": \"SUSPENDED\",\r\n//     \"isAvailable\": false\r\n// }\r\n\r\n// {\r\n//     \"isDeleted\": true\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/drivers/approve/688c85d12cb400c40b8e1975",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"approve",
+								"688c85d12cb400c40b8e1975"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fare Rule Only admin super-admin",
+			"item": [
+				{
+					"name": "Create FareRule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3ZmI4YjFlZTdkZWYzYTFhOTRlOTYiLCJlbWFpbCI6InJtZDA0MDM3QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NDAxMzA4MSwiZXhwIjoxNzU0MDk5NDgxfQ.gBUlSUiuk0_gsEp_l5X_8UfkkcCNSP_UEhw2yj7j3Qc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleType\": \"BIKE\",\r\n    \"baseFare\": 40,\r\n    \"perKmFare\": 20,\r\n    \"perMinuteFare\": 1,\r\n    \"demandMultiplier\": 1,\r\n    \"discount\": 0,\r\n    \"effectiveFrom\": \"2025-07-31T00:00:00.000+00:00\",\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/fare-rule/create",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"fare-rule",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update FareRule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3ZmI4YjFlZTdkZWYzYTFhOTRlOTYiLCJlbWFpbCI6InJtZDA0MDM3QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NDAzOTgzOSwiZXhwIjoxNzU0MTI2MjM5fQ.bH0FGMg28OqsEbPRfFWOGSUFVQn_UQxVHxHifWlP46g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"vehicleType\": \"CNG\",\r\n    \"baseFare\": 400,\r\n    // \"perKmFare\": 20,\r\n    // \"perMinuteFare\": 1,\r\n    // \"demandMultiplier\": 1,\r\n    \"discount\": 0.1,\r\n    \"effectiveFrom\": \"2025-08-01T00:00:00.000+00:00\"\r\n    // \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/fare-rule/update/688a7f06d2477c52d2a211b1",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"fare-rule",
+								"update",
+								"688a7f06d2477c52d2a211b1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sginle FareRule",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3ZmI4YjFlZTdkZWYzYTFhOTRlOTYiLCJlbWFpbCI6InJtZDA0MDM3QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NDAzOTgzOSwiZXhwIjoxNzU0MTI2MjM5fQ.bH0FGMg28OqsEbPRfFWOGSUFVQn_UQxVHxHifWlP46g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleType\": \"CNG\",\r\n    \"baseFare\": 40,\r\n    \"perKmFare\": 20,\r\n    \"perMinuteFare\": 1,\r\n    \"demandMultiplier\": 1,\r\n    \"discount\": 0,\r\n    \"effectiveFrom\": \"2025-07-31T00:00:00.000+00:00\",\r\n    \"active\": true\r\n}"
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/fare-rule/688a8350376c679a24d51059",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"fare-rule",
+								"688a8350376c679a24d51059"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Fare Rule",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3ZmI4YjFlZTdkZWYzYTFhOTRlOTYiLCJlbWFpbCI6InJtZDA0MDM3QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NDAzOTgzOSwiZXhwIjoxNzU0MTI2MjM5fQ.bH0FGMg28OqsEbPRfFWOGSUFVQn_UQxVHxHifWlP46g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleType\": \"CNG\",\r\n    \"baseFare\": 40,\r\n    \"perKmFare\": 20,\r\n    \"perMinuteFare\": 1,\r\n    \"demandMultiplier\": 1,\r\n    \"discount\": 0,\r\n    \"effectiveFrom\": \"2025-07-31T00:00:00.000+00:00\",\r\n    \"active\": true\r\n}"
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/fare-rule/",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"fare-rule",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ride",
+			"item": [
+				{
+					"name": "Create Ride",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg5MTU4M2MyNzRlMTk3ZDIxNGVmYmEiLCJlbWFpbCI6Im1kbW90YWhhcmFsaTIyNkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTQwMTI1MzksImV4cCI6MTc1NDA5ODkzOX0.kCL1Fo26fXojElGFYlC62VRhgp6-ZQRwZ58ZSrrCueM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"riderId\": \"68891583c274e197d214efba\",\r\n    \"vehicleType\": \"BIKE\",\r\n    \"pickup\": {\r\n        \"lat\": 23.8103,\r\n        \"lon\": 90.4125\r\n    },\r\n    \"destination\": {\r\n        \"lat\": 22.3569,\r\n        \"lon\": 91.7832\r\n    }\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/rides/request",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ride Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg4Y2E2YmY0MjFiMTMwOTkxMTQ5YmEiLCJlbWFpbCI6Inhmb3I0OTZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NDA0MDA4OCwiZXhwIjoxNzU0MTI2NDg4fQ.LyVI0gfQTafmw_uPy70pIn1LbpcQcpohPInruasfGiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     \"status\": \"CANCELLED\",\r\n//     \"cancellationReason\": \"CANCELLED BY RAKIB\" // optional\r\n// }\r\n// {\r\n//     \"status\": \"ACCEPTED\"\r\n// }\r\n// {\r\n// \"status\": \"PICKED_UP\"\r\n// }\r\n// {\r\n//     \"status\": \"IN_TRANSIT\"\r\n// }\r\n{\r\n    \"status\": \"COMPLETED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/rides/688c88eef1e5154604c82243/status",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"688c88eef1e5154604c82243",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rides/me only rider",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg4Y2E2YmY0MjFiMTMwOTkxMTQ5YmEiLCJlbWFpbCI6Inhmb3I0OTZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NDA0MDA4OCwiZXhwIjoxNzU0MTI2NDg4fQ.LyVI0gfQTafmw_uPy70pIn1LbpcQcpohPInruasfGiY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/rides/me?page=1",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"me"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "vehicleType",
+									"disabled": true
+								},
+								{
+									"key": "fields",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "status",
+									"value": "REQUESTED",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Rides only driver admin super admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhhMjMyODNkMWI0MDA0MzRkYWMwODciLCJlbWFpbCI6ImxvdmVmcm9tNTc0QGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTQwMDgwNTIsImV4cCI6MTc1NDA5NDQ1Mn0.-jdSXHqebDk3ZRU2-YCcL3Jo9zaWp3ZEgWMWwoseQ3c",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://jatra-server.vercel.app/api/v1/rides/",
+							"protocol": "https",
+							"host": [
+								"jatra-server",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								""
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "vehicleType",
+									"disabled": true
+								},
+								{
+									"key": "fields",
+									"value": "status",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "REQUESTED",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

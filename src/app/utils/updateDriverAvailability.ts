@@ -1,15 +1,15 @@
-import { Types } from "mongoose";
 import AppError from "../errorHelpers/AppError";
 import { StatusCodes } from "http-status-codes";
 import { Driver } from "../modules/driver/driver.model";
+import { JwtPayload } from "jsonwebtoken";
 
 export const updateDriverAvailability = async (
-  driverId: string | Types.ObjectId,
+  decodedToken: JwtPayload,
   isAvailable: boolean
 ): Promise<void> => {
-  if (!driverId) return;
+  if (!decodedToken.userId) return;
 
-  const driver = await Driver.findById(driverId);
+  const driver = await Driver.findOne({ userId: decodedToken.userId });
   if (!driver) {
     throw new AppError(
       StatusCodes.NOT_FOUND,

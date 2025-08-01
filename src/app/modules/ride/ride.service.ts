@@ -13,6 +13,7 @@ import {
   handleRiderRideStatus,
 } from "../../helpers/rideHelpers";
 import { Driver } from "../driver/driver.model";
+import { IDriver } from "../driver/driver.interface";
 
 const requestRide = async (
   payload: Partial<IRide>,
@@ -106,10 +107,7 @@ const updateRideStatus = async (
   if (!ride) {
     throw new AppError(StatusCodes.NOT_FOUND, "Ride not found");
   }
-  if (
-    ride.status === payload.status ||
-    ride.cancellationReason === payload.cancellationReason
-  ) {
+  if (ride.status === payload.status) {
     throw new AppError(StatusCodes.CONFLICT, "Please provide different status");
   }
 
@@ -119,22 +117,36 @@ const updateRideStatus = async (
     const updatedRide = await ride.save();
     return updatedRide;
   }
-  // driver section
+  // Driver Section
   if (decodedToken.role === Role.DRIVER) {
+    if (ride.status === RIDE_STATUS.COMPLETED) {
+      throw new AppError(
+        StatusCodes.BAD_REQUEST,
+        "This ride has been completed."
+      );
+    }
+
+    let driver: IDriver | null = null;
+
     if (!ride.driverId) {
       if (payload.status !== RIDE_STATUS.ACCEPTED) {
         throw new AppError(
           StatusCodes.BAD_REQUEST,
-          "No driver assigned to this ride yet."
+          "No driver assigned to this ride yet. Please provide first status as accepted."
         );
       }
-    } else {
-      const driver = await Driver.findOne({ _id: ride.driverId });
+      driver = await Driver.findOne({ userId: decodedToken.userId });
       if (!driver) {
         throw new AppError(StatusCodes.NOT_FOUND, "Driver not found");
       }
-      await handleDriverRideStatus(driver, ride, payload, decodedToken);
+    } else {
+      driver = await Driver.findOne({ userId: ride.driverId });
+      if (!driver) {
+        throw new AppError(StatusCodes.NOT_FOUND, "Driver not found");
+      }
     }
+
+    await handleDriverRideStatus(driver, ride, payload, decodedToken);
 
     const updatedRide = await ride.save();
     return updatedRide;

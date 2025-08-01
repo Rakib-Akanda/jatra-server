@@ -76,7 +76,7 @@ const handleDriverRideStatus = async (driver, ride, payload, decodedToken) => {
             ride.cancelledBy = decodedToken.userId;
             ride.cancellationReason =
                 payload.cancellationReason ?? "No reason provided";
-            await (0, updateDriverAvailability_1.updateDriverAvailability)(decodedToken.userId, true);
+            await (0, updateDriverAvailability_1.updateDriverAvailability)(decodedToken, true);
             break;
         case ride_interface_1.RIDE_STATUS.ACCEPTED:
             if (ride.status !== ride_interface_1.RIDE_STATUS.REQUESTED) {
@@ -85,7 +85,7 @@ const handleDriverRideStatus = async (driver, ride, payload, decodedToken) => {
             if (!driver.isAvailable) {
                 throw new AppError_1.default(http_status_codes_1.StatusCodes.FORBIDDEN, "You are currently in another ride and not available.");
             }
-            await (0, updateDriverAvailability_1.updateDriverAvailability)(decodedToken.userId, false);
+            await (0, updateDriverAvailability_1.updateDriverAvailability)(decodedToken, false);
             ride.status = ride_interface_1.RIDE_STATUS.ACCEPTED;
             ride.driverId = decodedToken.userId;
             break;
@@ -118,7 +118,7 @@ const handleDriverRideStatus = async (driver, ride, payload, decodedToken) => {
                 ride.estimatedDuration = 0;
             }
             ride.fare = await (0, calculateFare_1.calculateFare)(ride);
-            await (0, updateDriverAvailability_1.updateDriverAvailability)(decodedToken.userId, true);
+            await (0, updateDriverAvailability_1.updateDriverAvailability)(decodedToken, true);
             await driver_model_1.Driver.findByIdAndUpdate({ _id: driver._id }, {
                 $inc: { totalRides: 1 },
             }, { new: true, runValidators: true });
