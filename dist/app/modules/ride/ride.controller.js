@@ -38,9 +38,8 @@ const getMe = (0, catchAsync_1.catchAsync)(async (req, res) => {
     });
 });
 const getAllRides = (0, catchAsync_1.catchAsync)(async (req, res) => {
-    const decodedToken = req.user;
     const query = req.query;
-    const rides = await ride_service_1.RideServices.getAllRides(query, decodedToken);
+    const rides = await ride_service_1.RideServices.getAllRides(query);
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         statusCode: http_status_codes_1.StatusCodes.OK,

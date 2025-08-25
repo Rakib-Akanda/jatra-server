@@ -125,27 +125,27 @@ const getMe = async (query, decodedToken) => {
     ]);
     return { meta: meta, data: data };
 };
-const getAllRides = async (query, decodedToken) => {
-    // Admin/Super Admin Section
-    if (decodedToken.role !== user_interface_1.Role.DRIVER) {
-        const queryBuilder = new QueryBuilder_1.QueryBuilder(ride_model_1.Ride.find(), query);
-        const rides = await queryBuilder.filter().sort().fields().paginate();
-        const [data, meta] = await Promise.all([
-            rides.build(),
-            queryBuilder.getMeta(),
-        ]);
-        return { meta: meta, data: data };
-    }
-    // Driver section start
-    // ei driver je je ride er
-    const queryBuilder = new QueryBuilder_1.QueryBuilder(ride_model_1.Ride.find({ driverId: decodedToken.userId }), query);
+const getAllRides = async (query) => {
+    const queryBuilder = new QueryBuilder_1.QueryBuilder(ride_model_1.Ride.find(), query);
     const rides = await queryBuilder.filter().sort().fields().paginate();
     const [data, meta] = await Promise.all([
         rides.build(),
         queryBuilder.getMeta(),
     ]);
     return { meta: meta, data: data };
-    // Driver section end
+    // // Driver section start
+    // // ei driver je je ride er
+    // const queryBuilder = new QueryBuilder(
+    //   Ride.find({ driverId: decodedToken.userId }),
+    //   query
+    // );
+    // const rides = await queryBuilder.filter().sort().fields().paginate();
+    // const [data, meta] = await Promise.all([
+    //   rides.build(),
+    //   queryBuilder.getMeta(),
+    // ]);
+    // return { meta: meta, data: data };
+    // // Driver section end
 };
 exports.RideServices = {
     requestRide,

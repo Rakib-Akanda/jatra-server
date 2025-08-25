@@ -46,7 +46,7 @@ const getDrivers = async (query: Record<string, string>) => {
   return { data, meta };
 };
 const getSingleDriver = async (id: string, decodedToken: JwtPayload) => {
-  const driver = await Driver.findById(id);
+  const driver = await Driver.findOne({ userId: id });
   if (!driver) {
     throw new AppError(StatusCodes.NOT_FOUND, "Driver not found.");
   }

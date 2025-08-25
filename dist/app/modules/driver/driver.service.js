@@ -42,7 +42,7 @@ const getDrivers = async (query) => {
     return { data, meta };
 };
 const getSingleDriver = async (id, decodedToken) => {
-    const driver = await driver_model_1.Driver.findById(id);
+    const driver = await driver_model_1.Driver.findOne({ userId: id });
     if (!driver) {
         throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, "Driver not found.");
     }

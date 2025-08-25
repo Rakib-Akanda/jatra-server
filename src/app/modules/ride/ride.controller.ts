@@ -46,9 +46,8 @@ const getMe = catchAsync(async (req: Request, res: Response) => {
   });
 });
 const getAllRides = catchAsync(async (req: Request, res: Response) => {
-  const decodedToken = req.user as JwtPayload;
   const query = req.query as Record<string, string>;
-  const rides = await RideServices.getAllRides(query, decodedToken);
+  const rides = await RideServices.getAllRides(query);
 
   sendResponse(res, {
     success: true,
