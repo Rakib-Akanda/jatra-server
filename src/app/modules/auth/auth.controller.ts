@@ -50,7 +50,12 @@ const credentialsLogin = catchAsync(
   }
 );
 const getNewAccessToken = catchAsync(async (req: Request, res: Response) => {
-  const refreshToken = req.cookies.refreshToken;
+  const authHeader = req.headers.authorization;
+  const refreshToken =
+    authHeader && authHeader.startsWith("Bearer ")
+      ? authHeader.split(" ")[1]
+      : req.cookies.accessToken;
+
   if (!refreshToken) {
     throw new AppError(
       StatusCodes.BAD_REQUEST,

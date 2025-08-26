@@ -38,6 +38,7 @@ const getAllUsers = (0, catchAsync_1.catchAsync)(async (req, res) => {
 });
 const getMe = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const decodedToken = req.user;
+    console.log("decoded token get  me", decodedToken);
     const result = await user_service_1.UserServices.getMe(decodedToken.userId);
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
