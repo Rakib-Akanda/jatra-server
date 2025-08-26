@@ -13,6 +13,7 @@ export const setAuthCookie = (res: Response, tokenInfo: AuthTokens) => {
       httpOnly: true,
       secure: envVars.NODE_ENV === "production",
       sameSite: "none",
+      path: "/",
     });
   }
   if (tokenInfo.refreshToken) {
@@ -20,6 +21,7 @@ export const setAuthCookie = (res: Response, tokenInfo: AuthTokens) => {
       httpOnly: true,
       secure: envVars.NODE_ENV === "production",
       sameSite: "none",
+      path: "/",
     });
   }
 };

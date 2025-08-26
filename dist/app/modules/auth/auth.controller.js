@@ -44,7 +44,10 @@ const credentialsLogin = (0, catchAsync_1.catchAsync)(async (req, res, next) => 
     })(req, res, next);
 });
 const getNewAccessToken = (0, catchAsync_1.catchAsync)(async (req, res) => {
-    const refreshToken = req.cookies.refreshToken;
+    const authHeader = req.headers.authorization;
+    const refreshToken = authHeader && authHeader.startsWith("Bearer ")
+        ? authHeader.split(" ")[1]
+        : req.cookies.accessToken;
     if (!refreshToken) {
         throw new AppError_1.default(http_status_codes_1.StatusCodes.BAD_REQUEST, "No refresh token from cookies");
     }

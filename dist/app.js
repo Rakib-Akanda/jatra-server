@@ -19,8 +19,9 @@ app.use(express_1.default.urlencoded({ extended: true })); // safety for form da
 app.use((0, cookie_parser_1.default)());
 app.set("trust proxy", 1);
 app.use((0, cors_1.default)({
-    origin: env_1.envVars.FRONTEND_URL,
+    origin: [env_1.envVars.FRONTEND_URL],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 app.use((0, express_session_1.default)({
     secret: env_1.envVars.EXPRESS_SESSION_SECRET,

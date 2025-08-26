@@ -12,7 +12,13 @@ export const checkAuth =
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       // const accessToken = req.headers.authorization?.split(" ")[1]; eta token Bearer TOKEN er jonno just etia korte
-      const accessToken = req.headers.authorization || req.cookies.accessToken;
+      // const accessToken = req.headers.authorization || req.cookies.accessToken;
+      // Authorization header থেকে Bearer token নেওয়া
+      const authHeader = req.headers.authorization;
+      const accessToken =
+        authHeader && authHeader.startsWith("Bearer ")
+          ? authHeader.split(" ")[1]
+          : req.cookies.accessToken;
       if (!accessToken) {
         throw new AppError(StatusCodes.FORBIDDEN, "No Token Received");
       }
